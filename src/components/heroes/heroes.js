@@ -33,9 +33,17 @@ export default class Heroes extends Component {
         })
     }
 
+    removeHero(index) {
+        let aux = this.state.heroes;
+        aux.splice(index,1);
+        this.setState({
+            heroes: aux
+        })
+    }
+
     render() {
         const listHeroes = this.state.heroes.map((hero, index) => {
-            return <li key={index} className="list-group-item"><strong>{hero.name}</strong> <br /> {hero.description}</li>
+            return <li key={index} className="list-group-item"><strong>{hero.name}</strong> <br /> {hero.description}<br /> <button type="button" class="btn btn-danger" onClick={()=>{this.removeHero(index)}}>remove</button></li>
         });
         return (
             <div className="container">

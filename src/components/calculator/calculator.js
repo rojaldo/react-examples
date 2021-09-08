@@ -10,10 +10,6 @@ const RESULT_STATE = 3;
 
 export default class Calculator extends Component {
 
-    static propTypes = {
-        prop: PropTypes
-    }
-
     handleNumber(value) {
         switch (this.currentState) {
             case INIT_STATE:
@@ -119,8 +115,10 @@ export default class Calculator extends Component {
         return (
             <div className="container">
                 <table >
-                    <Display myDisplay={this.state.display}/>
-                    <Keyboard onSignal={(v)=>{this.handleClick(v)}}/>
+                    <tbody>
+                        <Display myDisplay={this.state.display} />
+                        <Keyboard onSignal={(v) => { this.handleClick(v) }} />
+                    </tbody>
                 </table>
             </div>
         )

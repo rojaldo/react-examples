@@ -3,6 +3,10 @@ import PropTypes from 'prop-types'
 
 export default class Display extends Component {
 
+    static propTypes = {
+        myDisplay: PropTypes.string.isRequired
+    }
+
     constructor(props) {
         super(props)
     
@@ -10,7 +14,6 @@ export default class Display extends Component {
              
         }
     }
-    
 
     render() {
         return (
@@ -20,7 +23,3 @@ export default class Display extends Component {
         )
     }
 }
-
-Display.propTypes = {
-    myDisplay: PropTypes.string.isRequired
-  };

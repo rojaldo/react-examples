@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
+import ListBeers from './listbeers';
+import SliderRange from './sliderrange';
 
 export default function Beers(props) {
 
     const [query, setQuery] = useState('https://api.punkapi.com/v2/beers');
     const [beers, setBeers] = useState([]);
+    const [range, setRange] = useState([1,5]);
 
     const myFetch = () => {
 
@@ -18,28 +21,15 @@ export default function Beers(props) {
     };
 
 
-    useEffect(myFetch, []);
 
-    const listBeers = beers.map((beer, index) => {
-        return (
-            <div className="col-xs-12 col-sm-12 col-md-6 col-lg-4 mt-3" key={index}>
-                <div className="card">
-                    <img className="card-img-top d-block mx-auto" src={beer.image_url} alt="" style={{ width: '50px' }} />
-                    <div className="card-body">
-                        <h4 className="card-title">{beer.name}</h4>
-                        <p className="card-text">{beer.tagline}</p>
-                    </div>
-                </div>
-            </div>
-        )
-    })
+
+    useEffect(myFetch, []);
 
     return (
 
         <div className="container">
-            <div className="row">
-                {listBeers}
-            </div>
+            <SliderRange onRange={(range)=>{setRange(range)}}/>
+            <ListBeers range={range} beers={beers}/>
         </div>
     )
 }

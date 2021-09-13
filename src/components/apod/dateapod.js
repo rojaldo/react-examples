@@ -5,23 +5,36 @@ import DatePicker from "react-datepicker";
 export default class DateApod extends Component {
     constructor(props) {
         super(props)
-    
+
         this.state = {
-             date: new Date()
+            date: {
+                startDate: new Date(),
+                endDate: null
+            }
         }
     }
 
-    setDate(date) {
+    setDate(dateArray) {
+        const aux = {startDate: dateArray[0], endDate: dateArray[1]};
+        console.log(JSON.stringify(aux));
         this.setState({
-            date: date
+            date: aux
         })
-        this.props.onDate(moment(date).format('YYYY-MM-DD'));
+        this.props.onDate(aux);
 
     };
-    
+
     render() {
         return (
-            <DatePicker selected={this.state.date} onChange={(date) => {this.setDate(date)}} />
+            <DatePicker
+                selected={this.state.date.startDate}
+                onChange={(date) => { this.setDate(date) }}
+                startDate={this.state.date.startDate}
+                endDate={this.state.date.endDate}
+                selectsRange
+                inline
+            />
+            // <DatePicker selected={this.state.date} onChange={(date) => {this.setDate(date)}} />
         )
     }
 }

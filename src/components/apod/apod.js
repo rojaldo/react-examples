@@ -16,9 +16,9 @@ export default class Apod extends Component {
 
     }
 
-    updateDate(date) {
+    updateDate(dateObj) {
         this.setState({
-            dateString: date
+            date: dateObj
         })
     };
 
@@ -28,7 +28,7 @@ export default class Apod extends Component {
         return (
             <div class="container">
                 <DateApod onDate={(date)=>{this.updateDate(date)}}/>
-                <ShowApod date={this.state.dateString}/>
+                <ShowApod date={this.state.date}/>
             </div>
         )
     }

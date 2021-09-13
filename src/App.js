@@ -13,7 +13,7 @@ function App() {
 
   return (
     <div className="App">
-      <Tabs defaultActiveKey="apod" id="uncontrolled-tab-example" className="mb-3">
+      <Tabs defaultActiveKey="beers" id="uncontrolled-tab-example" className="mb-3">
         <Tab eventKey="calculator" title="Calculator">
           <Calculator />
         </Tab>

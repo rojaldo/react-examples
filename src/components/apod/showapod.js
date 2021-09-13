@@ -8,7 +8,7 @@ export default class ShowApod extends Component {
 
         this.state = {
             apod: {},
-            date: moment(new Date()).format('YYYY-MM-DD')
+            dateRange: {}
         }
 
         this.opts = {
@@ -21,24 +21,28 @@ export default class ShowApod extends Component {
     }
 
     componentDidMount() {
-        fetch('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&date=' + this.state.date)
-            .then(response => response.json())
-            .then(data => {
-                this.setState({
-                    apod: data,
-                    date: this.props.date
-                })
-            })
+        // fetch('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&date=' + this.state.dateRange)
+        //     .then(response => response.json())
+        //     .then(data => {
+        //         this.setState({
+        //             apod: data,
+        //             dateRange: this.props.date
+        //         })
+        //     })
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        return (this.state.date !== nextProps.date)
+        return (this.state.dateRange !== nextProps.date)
     }
 
 
 
     componentDidUpdate(prevProps, prevState) {
-        fetch('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&date=' + this.props.date)
+        console.log(JSON.stringify(this.props.date));
+        const startDate = moment(this.props.date.startDate).format('YYYY-MM-DD');
+        const endDate = moment(this.props.date.endDate).format('YYYY-MM-DD');
+        console.log(endDate);
+        fetch('https://api.nasa.gov/planetary/apod?api_key=tqz634Z1x0LiJzjbhSyUoExrZaGKLM0MG1VnROR6&start_date=' + startDate + '&end_date=' + endDate)
             .then(response => response.json())
             .then(data => {
                 this.setState({

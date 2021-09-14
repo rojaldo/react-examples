@@ -42,7 +42,7 @@ export default class ShowApod extends Component {
         const startDate = moment(this.props.date.startDate).format('YYYY-MM-DD');
         const endDate = moment(this.props.date.endDate).format('YYYY-MM-DD');
         console.log(endDate);
-        fetch('https://api.nasa.gov/planetary/apod?api_key=tqz634Z1x0LiJzjbhSyUoExrZaGKLM0MG1VnROR6&start_date=' + startDate + '&end_date=' + endDate)
+        fetch('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&start_date=' + startDate + '&end_date=' + endDate)
             .then(response => response.json())
             .then(data => {
                 this.setState({

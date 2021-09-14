@@ -1,32 +1,68 @@
 import './App.css';
-import Calculator from './components/calculator/calculator';
-import Heroes from './components/heroes/heroes';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Tabs from 'react-bootstrap/Tabs';
-import Tab from 'react-bootstrap/Tab';
+import Calculator from './components/calculator/calculator';
+import Heroes from './containers/heroescontainer';
 import Beers from './components/beers/beers';
 import Apod from './components/apod/apod';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link, Redirect
+} from "react-router-dom";
 
 function App() {
 
-  const variant = 'primary';
-
   return (
+    
     <div className="App">
-      <Tabs defaultActiveKey="beers" id="uncontrolled-tab-example" className="mb-3">
-        <Tab eventKey="calculator" title="Calculator">
-          <Calculator />
-        </Tab>
-        <Tab eventKey="heroes" title="Heroes">
-          <Heroes />
-        </Tab>
-        <Tab eventKey="beers" title="Beers">
-          <Beers />
-        </Tab>
-        <Tab eventKey="apod" title="Apod">
-          <Apod />
-        </Tab>
-      </Tabs>
+      <Router>
+        <nav className="navbar navbar-expand-sm navbar-dark bg-primary mb-4">
+          <a className="navbar-brand" href="#">React Samples</a>
+          <button className="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="collapsibleNavId">
+            <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
+              <li className="nav-item active">
+                <Link className="nav-link" to="/calculator">Calculator</Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/heroes">Heroes</Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/beers">Beers</Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/apod">Apod</Link>
+              </li>
+            </ul>
+          </div>
+        </nav>
+        <div>
+          <Switch>
+            <Route path="/calculator">
+              <Calculator />
+            </Route>
+            <Route path="/heroes">
+              <Heroes />
+            </Route>
+            <Route path="/beers">
+              <Beers />
+            </Route>
+            <Route path="/apod">
+              <Apod />
+            </Route>
+            <Route path="/">
+              <Redirect to="/calculator" />
+            </Route>
+            <Route path="*">
+              <h1>404</h1>
+            </Route>
+          </Switch>
+        </div>
+      </Router>
 
     </div>
 

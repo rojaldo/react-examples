@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { Hero } from '../../model/hero'
 import HeroForm from './heroform'
 import HeroesList from './heroeslist'
 
@@ -10,7 +8,7 @@ export default class Heroes extends Component {
         super(props)
 
         this.state = {
-            heroes: [new Hero('Batman', 'dark knight'), new Hero('Superman', 'man of steel'), new Hero('Spiderman', '')]
+            heroes: props.heroes
         }
 
     }
@@ -18,7 +16,8 @@ export default class Heroes extends Component {
     handleAddHero(hero) {
         this.setState({
             heroes: [...this.state.heroes, hero]
-        })
+        });
+        this.props.updateHeroes([...this.state.heroes, hero]);
     }
 
     removeHero(index) {

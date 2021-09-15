@@ -10,6 +10,20 @@ const RESULT_STATE = 3;
 
 export default class Calculator extends Component {
 
+    constructor(props) {
+        super(props)
+
+        this.currentState = INIT_STATE;
+        this.firstFigure = 0;
+        this.secondFigure = 0;
+        this.result = 0;
+        this.operator = '';
+
+        this.state = {
+            display: ''
+        }
+    }
+
     handleNumber(value) {
         switch (this.currentState) {
             case INIT_STATE:
@@ -95,20 +109,6 @@ export default class Calculator extends Component {
             this.handleSymbol(value)
         }
 
-    }
-
-    constructor(props) {
-        super(props)
-
-        this.currentState = INIT_STATE;
-        this.firstFigure = 0;
-        this.secondFigure = 0;
-        this.result = 0;
-        this.operator = '';
-
-        this.state = {
-            display: ''
-        }
     }
 
     render() {

@@ -5,22 +5,25 @@ export default class HeroForm extends Component {
 
     constructor(props) {
         super(props)
-    
+
         this.state = {
-            newHero: new Hero()
+            newHero: this.props.newHero
         }
     }
-    
+
     handleChange(event) {
         if (event.target.name === 'name') {
             this.setState({
                 newHero: { name: event.target.value, description: this.state.newHero.description }
             })
+            this.props.onFormChange({ name: event.target.value, description: this.state.newHero.description })
         } else if (event.target.name === 'description') {
             this.setState({
                 newHero: { name: this.state.newHero.name, description: event.target.value }
             })
+            this.props.onFormChange({ name: this.state.newHero.name, description: event.target.value })
         }
+
     }
 
     handleClick() {
@@ -28,6 +31,7 @@ export default class HeroForm extends Component {
         this.setState({
             newHero: new Hero()
         })
+        this.props.onFormChange(new Hero())
     }
 
     render() {

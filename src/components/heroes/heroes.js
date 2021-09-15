@@ -26,13 +26,13 @@ export default class Heroes extends Component {
         this.setState({
             heroes: aux
         })
+        this.props.updateHeroes(aux);
     }
 
     render() {
-
         return (
             <div className="container">
-                <HeroForm onAdd={(hero)=>{this.handleAddHero(hero)}}/>
+                <HeroForm onAdd={(hero)=>{this.handleAddHero(hero)}} onFormChange={(hero)=>{this.props.updateHeroForm(hero)}} newHero={this.props.newHero}/>
                 <HeroesList heroes={this.state.heroes} removeHero={(idx)=>{this.removeHero(idx)}}/>
             </div>
         )

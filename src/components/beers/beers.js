@@ -41,7 +41,7 @@ export default function Beers(props) {
 
         <div className="container">
             <FormControl component="fieldset">
-                <FormLabel component="legend">Gender</FormLabel>
+                <FormLabel component="legend">Order</FormLabel>
                 <RadioGroup aria-label="gender" name="gender1" value={order} onChange={handleChange}>
                     <FormControlLabel value={0} control={<Radio />} label="Alphabetical" />
                     <FormControlLabel value={1} control={<Radio />} label="Abv" />

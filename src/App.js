@@ -1,6 +1,6 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Calculator from './components/calculator/calculator';
+import Calculator from './containers/calculatorcontainer';
 import Heroes from './containers/heroescontainer';
 import Beers from './components/beers/beers';
 import Apod from './components/apod/apod';
@@ -43,7 +43,7 @@ function App() {
         <div>
           <Switch>
             <Route path="/calculator">
-              <Calculator />
+              <Calculator/>
             </Route>
             <Route path="/heroes">
               <Heroes />

@@ -5,7 +5,14 @@ export const reducer = (state = {
         heroList: [new Hero('Batman', 'dark knight'), new Hero('Superman', 'man of steel'), new Hero('Robin', '')],
         heroForm: { name: 'Thor', description: 'God of Thunder' }
     },
-    calculator: {},
+    calculator: {
+        currentState: 0,
+        firstFigure: 0,
+        secondFigure: 0,
+        result: 0,
+        operator: '',
+        display: ''
+    },
     beers: {},
     apod: {}
 }, action) => {
@@ -15,6 +22,9 @@ export const reducer = (state = {
             return state;
         case 'UPDATE_HERO_FORM':
             state.heroes.heroForm = action.payload.newHero;
+            return state;
+        case 'UPDATE_CALCULATOR':
+            state.calculator = action.payload.calculator;
             return state;
         default:
             return state;

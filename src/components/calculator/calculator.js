@@ -13,31 +13,43 @@ export default class Calculator extends Component {
     constructor(props) {
         super(props)
 
-        this.currentState = INIT_STATE;
-        this.firstFigure = 0;
-        this.secondFigure = 0;
-        this.result = 0;
-        this.operator = '';
+        this.currentState = this.props.data.currentState || INIT_STATE;
+        this.firstFigure = this.props.data.firstFigure || 0;
+        this.secondFigure = this.props.data.secondFigure || 0;
+        this.result = this.props.data.result || 0;
+        this.operator = this.props.data.operator || '';
 
         this.state = {
-            display: ''
+            display: this.props.data.display || ''
         }
     }
+
+    updateData(disp){
+        this.setState({ display: disp });
+        this.props.updateCalculator({
+            firstFigure: this.firstFigure, 
+            secondFigure:this.secondFigure, 
+            result: this.result, 
+            operator: this.operator,
+            currentState: this.currentState,
+            display: disp});
+    }
+
 
     handleNumber(value) {
         switch (this.currentState) {
             case INIT_STATE:
                 this.firstFigure = value;
                 this.currentState = FIRST_FIGURE_STATE;
-                this.setState({ display: this.state.display + value });
+                this.updateData(this.state.display + value);
                 break;
             case FIRST_FIGURE_STATE:
                 this.firstFigure = this.firstFigure * 10 + value;
-                this.setState({ display: this.state.display + value });
+                this.updateData(this.state.display + value)
                 break;
             case SECOND_FIGURE_STATE:
                 this.secondFigure = this.secondFigure * 10 + value;
-                this.setState({ display: this.state.display + value });
+                this.updateData(this.state.display + value)
                 break;
             case RESULT_STATE:
                 this.firstFigure = value;
@@ -45,7 +57,7 @@ export default class Calculator extends Component {
                 this.result = 0;
                 this.operator = '';
                 this.currentState = FIRST_FIGURE_STATE;
-                this.setState({ display: '' + value });
+                this.updateData('' + value );
                 break;
 
             default:
@@ -76,14 +88,14 @@ export default class Calculator extends Component {
                 if (value === '+' || value === '-' || value === '*' || value === '/') {
                     this.operator = value;
                     this.currentState = SECOND_FIGURE_STATE;
-                    this.setState({ display: this.state.display + value });
+                    this.updateData(this.state.display + value)
                 }
                 break;
             case SECOND_FIGURE_STATE:
                 if (value === '=') {
                     this.result = this.calculateResult();
                     this.currentState = RESULT_STATE;
-                    this.setState({ display: this.state.display + '=' + this.result });
+                    this.updateData(this.state.display + '=' + this.result)
                 }
                 break;
             case RESULT_STATE:
@@ -93,7 +105,7 @@ export default class Calculator extends Component {
                     this.result = 0;
                     this.operator = value;
                     this.currentState = SECOND_FIGURE_STATE;
-                    this.setState({ display: this.firstFigure + this.operator });
+                    this.updateData(this.firstFigure + this.operator)
                 }
                 break;
 

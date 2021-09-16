@@ -12,10 +12,12 @@ export default function Trivial() {
             const data = await response.json();
             setData(data);
             console.log(data);
+            let array = []
             for (const jsonCard of data.results) {
                 const newCard = new CardModel(jsonCard);
-                setCards(cards.concat(newCard));
+                array = [...array, newCard];
             }
+            setCards(array);
             
         };
         fetchData();

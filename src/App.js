@@ -2,7 +2,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Calculator from './containers/calculatorcontainer';
 import Heroes from './containers/heroescontainer';
-import Beers from './components/beers/beers';
+import Beers from './containers/beerscontainer';
 import Apod from './components/apod/apod';
 import {
   BrowserRouter as Router,
@@ -10,11 +10,12 @@ import {
   Route,
   Link, Redirect
 } from "react-router-dom";
+import Trivial from './components/trivial/trivial';
 
 function App() {
 
   return (
-    
+
     <div className="App">
       <Router>
         <nav className="navbar navbar-expand-sm navbar-dark bg-primary mb-4">
@@ -37,13 +38,16 @@ function App() {
               <li className="nav-item">
                 <Link className="nav-link" to="/apod">Apod</Link>
               </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/trivial">Trivial</Link>
+              </li>
             </ul>
           </div>
         </nav>
         <div>
           <Switch>
             <Route path="/calculator">
-              <Calculator/>
+              <Calculator />
             </Route>
             <Route path="/heroes">
               <Heroes />
@@ -54,10 +58,13 @@ function App() {
             <Route path="/apod">
               <Apod />
             </Route>
-            <Route path="/">
-              <Redirect to="/calculator" />
+            <Route path="/trivial">
+              <Trivial />
             </Route>
-            <Route path="*">
+            <Route path="/">
+              <Redirect to="/trivial" />
+            </Route>
+            <Route path="/*">
               <h1>404</h1>
             </Route>
           </Switch>

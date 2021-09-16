@@ -10,12 +10,12 @@ import FormLabel from '@material-ui/core/FormLabel';
 const ALPHABETICAL = 0;
 const ABV = 1;
 
-export default function Beers(props) {
+export default function Beers({beersProp, rangeProp, orderProp, updateBeers, updateRange, updateOrder}) {
 
     const [query, setQuery] = useState('https://api.punkapi.com/v2/beers');
-    const [beers, setBeers] = useState([]);
-    const [range, setRange] = useState([1, 5]);
-    const [order, setOrder] = useState(ALPHABETICAL);
+    const [beers, setBeers] = useState(beersProp);
+    const [range, setRange] = useState(rangeProp);
+    const [order, setOrder] = useState(orderProp);
 
     const myFetch = () => {
 
@@ -24,18 +24,24 @@ export default function Beers(props) {
             const response = await fetch(query);
             const data = await response.json();
             setBeers(data);
+            updateBeers(data);
         };
 
         fetchData();
     };
+    useEffect(myFetch, []);
 
     const handleChange = (event) => {
         setOrder(parseInt(event.target.value));
-        console.log(parseInt(event.target.value));
+        updateOrder(parseInt(event.target.value));
     };
 
 
-    useEffect(myFetch, []);
+
+    const onRange = (range) => {
+        setRange(range);
+        updateRange(range);
+    }
 
     return (
 
@@ -47,7 +53,7 @@ export default function Beers(props) {
                     <FormControlLabel value={1} control={<Radio />} label="Abv" />
                 </RadioGroup>
             </FormControl>
-            <SliderRange onRange={(range) => { setRange(range) }} />
+            <SliderRange onRange={(range) => { onRange(range) }} range={range}/>
             <ListBeers range={range} order={order} beers={beers} />
         </div>
     )

@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import Slider from '@material-ui/core/Slider';
 
-export default function SliderRange({onRange}) {
+export default function SliderRange({onRange, range}) {
 
-    const [value, setValue] = useState([1, 5]);
+    const [value, setValue] = useState(range);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);

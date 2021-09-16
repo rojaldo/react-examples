@@ -6,5 +6,6 @@ export class CardModel {
         this.category = jsonCard.category;
         this.type = jsonCard.type;
         this.difficulty = jsonCard.difficulty;
+        this.responded = false;
     }
 }

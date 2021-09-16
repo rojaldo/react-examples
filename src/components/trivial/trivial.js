@@ -6,6 +6,7 @@ export default function Trivial() {
     const [query, setQuery] = useState('https://opentdb.com/api.php?amount=10');
     const [data, setData] = useState({});
     const [cards, setCards] = useState([]);
+    const [score, setScore] = useState(0)
     const myFetch = () => {
         const fetchData = async () => {
             const response = await fetch(query);
@@ -23,16 +24,24 @@ export default function Trivial() {
         fetchData();
     };
     useEffect(myFetch, []);
+
+    const processAnswer = (rightAnswered) => {
+        if(rightAnswered){
+            setScore(score + 2);
+        }else {
+            setScore(score - 1);
+        }
+    }
     
     const cardList = cards.map((card, index) => {
         return (
-            <TrivialCard key={index} card={card} />
+            <TrivialCard key={index} card={card} onAnswered={(rightAnswered)=>{processAnswer(rightAnswered)}}/>
         );
     });
 
     return (
         <div class="container">
-            
+            <h2>{score}<span class="badge badge-primary">New</span></h2>
             <div class="row">
                 {cardList}
             </div>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-export default function TrivialCard({ card }) {
+export default function TrivialCard({ card, onAnswered}) {
 
     const [myCard, setMyCard] = useState(card);
     const [answered, setanswered] = useState(card.responded)
@@ -13,6 +13,11 @@ export default function TrivialCard({ card }) {
         tmp.userAnswer = answer;
         setMyCard(tmp);
         setanswered(true);
+        if(answer === card.rightAnswer) {
+            onAnswered(true);
+        }else {
+            onAnswered(false);
+        }
     }
 
     const getClass = (index, answer) => {
@@ -49,7 +54,7 @@ export default function TrivialCard({ card }) {
         <div class="col-sm-12 col-md-6 col-lg-4">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">{myCard.question}</h4>
+                    <h4 class="card-title" dangerouslySetInnerHTML={{__html:myCard.question}}></h4>
                     {buttons}
                 </div>
             </div>
